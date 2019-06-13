@@ -30,6 +30,15 @@ public class TestWithPageObject {
 
         Assert.assertTrue(employeePage.textoPaginaIsDisplayed() &&
                 employeePage.textoPaginaContainsText("Add Employee"));
+    }
+
+    @Test
+    public void testLoginIncorrecto(){
+        homePage.incorrectLogin("administrador", "admin1234");
+        Assert.assertTrue(homePage.messageErrorIsDisplayed());
+    }
+
+    public void tearDown(){
         driver.quit();
     }
 }
