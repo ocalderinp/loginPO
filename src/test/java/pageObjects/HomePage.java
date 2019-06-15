@@ -4,32 +4,31 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class HomePage {
-    WebDriver driver;
-
+public class HomePage extends BasePage{
     @FindBy(how = How.ID, using = "user")
-    WebElement inputUser;
+    private WebElement inputUser;
 
     @FindBy(how = How.ID, using = "pass")
-    WebElement inputPassword;
+    private WebElement inputPassword;
 
-//    @FindBy(how = How.ID, using = "loginButton")
-    WebElement loginButton;
+    @FindBy(how = How.ID, using = "loginButton")
+    private WebElement loginButton;
 
-    @FindBy(how = How.NAME, using = "errorMessage")
-    WebElement messageError;
+//    @FindBy(how = How.NAME, using = "errorMessage")
+    @FindBy(name = "errorMessage")
+    private WebElement messageError;
 
     public HomePage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public EmployeePage login(String usuario, String password){
         inputUser.sendKeys(usuario);
         inputPassword.sendKeys(password);
         loginButton.click();
+        wait.until(ExpectedConditions.titleIs("Add Employee v2 – Verstand QA"));
         return new EmployeePage(driver);
     }
 
