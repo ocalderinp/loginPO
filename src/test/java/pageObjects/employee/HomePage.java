@@ -1,12 +1,13 @@
-package pageObjects;
+package pageObjects.employee;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import pageObjects.BasePage;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
     @FindBy(how = How.ID, using = "user")
     private WebElement inputUser;
 
