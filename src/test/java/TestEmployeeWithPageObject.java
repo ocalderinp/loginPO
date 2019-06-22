@@ -14,7 +14,8 @@ public class TestEmployeeWithPageObject {
 
     @BeforeMethod
     public void setupTest(){
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",
+                "drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.get("http://verstandqa.com/login-employee-v2/");
         homePage = new HomePage(driver);
@@ -36,7 +37,8 @@ public class TestEmployeeWithPageObject {
     @Test
     public void addEmployed(){
         employeePage = homePage.login("admin","admin123");
-        employeePage.addEmployee("Simon", "Rivera 123","Montevideo","Montevideo",
+        employeePage.addEmployee("Simon", "Rivera 123",
+                "Montevideo","Montevideo",
                 "123456","s.s@gmail.com","3216548");
 
         Assert.assertTrue(employeePage.messageSuccessIsDisplayed());

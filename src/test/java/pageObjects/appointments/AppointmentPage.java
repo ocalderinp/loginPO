@@ -42,11 +42,13 @@ public class AppointmentPage extends BasePage {
         return driver.findElement(By.tagName("h2")).getText().contains("Make Appointment");
     }
 
-    public FinalPage addAppointment(String calendar, String comment, String comboFacility, String program){
+    public FinalPage addAppointment(String calendar, String comment,
+                                    String comboFacility, String program, boolean applyHospital){
         Select combo = new Select(inputFacility);
         combo.selectByValue(comboFacility);
 
-        inputHospital.click();
+        if(applyHospital)
+            inputHospital.click();
 
         if(program.equals("Medicaid")){
             inputMedicaid.click();
