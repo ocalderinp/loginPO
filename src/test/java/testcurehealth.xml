@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <parameter name="usuario" value="John Doe"/>
+    <parameter name="password" value="ThisIsNotAPassword"/>
+    <test name="X" >
+        <classes>
+            <class name="TestCureHealth" >
+                <methods>
+                    <include name="login"/>
+                    <include name="badLogin"/>
+                    <include name="testAppointment"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

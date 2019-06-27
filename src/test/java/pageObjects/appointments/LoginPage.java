@@ -22,22 +22,37 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//h2[contains(text(), 'Login')]")
     WebElement loginTitle;
 
+    @FindBy(className = "text-danger")
+    WebElement loginFailed;
+
     //Constructor que hereda de basePage
-    public LoginPage (WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     //Operaciones del pageObject
-    public AppointmentPage loginSuccess (String username, String password){
-        usernameField.sendKeys(username);
-        passwordField.sendKeys(password);
-        loginButton.click();
+    public AppointmentPage loginSuccess(String username, String password) {
+        loginAs(username, password);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h2")));
         return new AppointmentPage(driver);
     }
 
+    public void loginFail(String username, String password) {
+        loginAs(username, password);
+    }
+
+    public void loginAs(String user, String pass){
+        usernameField.sendKeys(user);
+        passwordField.sendKeys(pass);
+        loginButton.click();
+    }
+
     public boolean verifyIsLoginPage() {
         return loginTitle.isDisplayed();
+    }
+
+    public boolean loginFailed() {
+        return loginFailed.isDisplayed();
     }
 
 }
