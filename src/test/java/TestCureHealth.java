@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,6 +11,10 @@ import pageObjects.appointments.AppointmentPage;
 import pageObjects.appointments.FinalPage;
 import pageObjects.appointments.HomePage;
 import pageObjects.appointments.LoginPage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class TestCureHealth {
 
@@ -23,11 +28,26 @@ public class TestCureHealth {
     SoftAssert SA;
 
     @BeforeMethod(alwaysRun = true)
-    @Parameters({"usuario", "password"})
-    public void setUp(String usuario, String password){
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-        driver = new ChromeDriver();
-        driver.get("https://katalon-demo-cura.herokuapp.com");
+    @Parameters({"usuario", "password", "browser"})
+    public void setUp(String usuario, String password, String browser){
+        if(browser.equalsIgnoreCase("chrome")){
+            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+            driver = new ChromeDriver();
+        }
+        else if(browser.equalsIgnoreCase("firefox")){
+            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+            driver = new FirefoxDriver();
+        }
+        Properties properties = new Properties();
+        InputStream in = getClass().getResourceAsStream("/config.properties");
+        try {
+            properties.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        driver.get(properties.getProperty("URL"));
+        String a = properties.getProperty("db.connection");
         homePage = new HomePage(driver);
         SA = new SoftAssert();
         this.usuario = usuario;
