@@ -47,7 +47,6 @@ public class TestCureHealth {
         }
 
         driver.get(properties.getProperty("URL"));
-        String a = properties.getProperty("db.connection");
         homePage = new HomePage(driver);
         SA = new SoftAssert();
         this.usuario = usuario;
