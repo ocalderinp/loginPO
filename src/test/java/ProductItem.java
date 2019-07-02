@@ -18,6 +18,6 @@ public class ProductItem {
     }
 
     public void addToWish() {
-        element.findElement(By.cssSelector("li.fa-heart")).click();
+        element.findElement(By.cssSelector("i.fa-heart")).click();
     }
 }
