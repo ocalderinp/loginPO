@@ -2,6 +2,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjects.opencart.HomeOpencart;
+import pageObjects.opencart.ProductItem;
 
 import java.util.List;
 
@@ -25,5 +27,15 @@ public class TestProducts {
                 p.addToWish();
             }
         }
+    }
+
+    public void testSearch(){
+        System.setProperty("webdriver.chrome.driver",
+                "drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://opencart.abstracta.us/");
+        HomeOpencart home = new HomeOpencart(driver);
+
+        home.searchProduct("iMac");
     }
 }
